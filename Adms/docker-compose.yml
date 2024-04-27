@@ -1,0 +1,64 @@
+version: "3.7"
+services:
+  app-adms:
+    build:
+      args:
+        user: sammy
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: api-back-adms
+    container_name: api-back-adms
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - back-end
+
+  nginx:
+    image: nginx:alpine
+    container_name: back-adms-nginx
+    restart: unless-stopped
+    ports:
+      - 8007:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - back-end
+
+
+  db_adms:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: lifefit
+      MYSQL_DATABASE: adms
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data_adms:/var/lib/mysql
+    networks:
+      - back-end
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db_adms
+      MYSQL_ROOT_PASSWORD: lifefit
+    networks:
+      - back-end
+    
+
+networks:
+  back-end:
+    driver: bridge
+
+volumes:
+  db_data_adms:    
