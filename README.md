@@ -36,6 +36,23 @@ Por fim, você precisa instalar as dependências do projeto. Isso pode ser feito
 
 ## 4. para criar a pasta vedor onde tem todas as dependêcias do projeto que vai ser usada 
 ```bash
-docker-compose exec app-servico1 composer install
+docker-compose exec app-adms composer install
+docker-compose exec app-client composer install
 
+```
+## 5. criar as tabelas no seu banco de dados e preencher depois as tabelas com os dados padrão
+```
+docker-compose exec app-adms php artisan migrate
+docker-compose exec app-adms php artisan db:seed
+
+docker-compose exec app-client php artisan migrate
+docker-compose exec app-client php artisan db:seed
+
+```
+
+## 6. gerar a chave secreta usada pela JWT 
+
+```
+docker-compose exec app-client php artisan jwt:secret
+docker-compose exec app-adms php artisan jwt:secret
 ```
