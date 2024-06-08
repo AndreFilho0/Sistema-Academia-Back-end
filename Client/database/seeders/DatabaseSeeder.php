@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Planos;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $planos = [
+            [ "nome"=>"mensal","valor"=>"89.99"],
+             ["nome"=>"trimestral","valor"=>"249.99"],
+             ["nome"=>"semestral","valor"=>"499.99"],
+             ["nome"=>"anual","valor"=>"989.99"],
+        ];
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+         foreach ($planos as $plano) {
+            Planos::create($plano);
+        }
+
     }
 }

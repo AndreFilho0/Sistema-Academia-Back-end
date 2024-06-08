@@ -1,0 +1,176 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Micro-Serviço Cliente-api",
+        "description": "todos os endpoints usados pelo cliente",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/registrar": {
+            "post": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "endpoint para registrar um novo cliente",
+                "description": "",
+                "operationId": "registrarCliente",
+                "requestBody": {
+                    "description": "Corpo da requisição contendo os dados para criação do registro",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "plano"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "plano": {
+                                        "type": "string",
+                                        "enum": [
+                                            "mensal",
+                                            "trimestral",
+                                            "semestral",
+                                            "anual"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de sucesso",
+                                    "properties": {
+                                        "mensagem": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "dados": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "corpo invalido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de erro",
+                                    "properties": {
+                                        "mensagem": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "erros": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "endpoint para login do cliente",
+                "description": "",
+                "operationId": "loginCliente",
+                "requestBody": {
+                    "description": "Corpo da requisição para fazer login",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucesso ao entrar",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de sucesso",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "corpo invalido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de erro",
+                                    "properties": {
+                                        "mensagem": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "erros": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
