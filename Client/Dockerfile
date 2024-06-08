@@ -31,6 +31,9 @@ RUN mkdir -p /home/$user/.composer && \
 
 WORKDIR /var/www
 
+# Copiar arquivos do projeto para o container
+COPY . /var/www
+
 USER $user
 
 # Instalar dependências do Composer
