@@ -31,14 +31,7 @@ RUN mkdir -p /home/$user/.composer && \
 
 WORKDIR /var/www
 
-# Copiar arquivos do projeto para o container
-COPY . /var/www
+
 
 USER $user
 
-# Instalar dependências do Composer
-RUN composer install --no-scripts --no-interaction
-
-# Executar migrations e seeders do Laravel
-RUN php artisan migrate --no-interaction && \
-    php artisan db:seed --no-interaction
