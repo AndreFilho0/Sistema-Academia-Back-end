@@ -11,7 +11,9 @@ namespace App\Http\Controllers;
  * )
  */
 
-class DocsController {
+
+
+class AuthDocsController {
     /**
  * @OA\Post(
  *      path="/api/registrar",
@@ -107,6 +109,49 @@ class DocsController {
  public function login(){
 
 
+
+ }
+
+/**
+     * @OA\Get(
+     *      path="/api/logout",
+     *      operationId="logoutCliente",
+     *      tags={"Cliente"},
+     *      summary="Endpoint para logout do cliente",
+     *      description="Passar o token na cabeça (Authorization: Bearer {token})",
+     *      @OA\Parameter(
+     *          name="Authorization",
+     *          in="header",
+     *          required=true,
+     *          description="Token JWT",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Sucesso ao entrar",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              description="Resposta de sucesso",
+     *              @OA\Property(property="message", type="string"),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Corpo inválido",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              description="Resposta de erro",
+     *              @OA\Property(property="mensagem", type="string"),
+     *              @OA\Property(property="status", type="string"),
+     *              @OA\Property(property="erros", type="object")
+     *          )
+     *      ),
+     *     
+     * )
+     */
+ public function logout(){
 
  }
 
