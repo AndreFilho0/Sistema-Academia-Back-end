@@ -22,10 +22,13 @@ Route::group([
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+    Route::get('/logout',[AuthController::class,'logout']);
     
 });
 
 
 Route::post('login',[AuthController::class,'login']);
 Route::post('registrar',[AuthController::class,'criarConta']);
+
 
