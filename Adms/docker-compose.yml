@@ -1,9 +1,8 @@
-version: "3.7"
+version: "3.9"
 services:
   app-adms:
     build:
       args:
-        user: sammy
         uid: 1000
       context: ./
       dockerfile: Dockerfile
@@ -54,11 +53,11 @@ services:
       MYSQL_ROOT_PASSWORD: lifefit
     networks:
       - back-end
-    
+
 
 networks:
   back-end:
     driver: bridge
 
 volumes:
-  db_data_adms:    
+  db_data_adms:
