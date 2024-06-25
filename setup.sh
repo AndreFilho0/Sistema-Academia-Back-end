@@ -33,19 +33,25 @@ docker-compose up --build -d
 # Passo 4: Instalar as dependências usando Composer
 echo "Instalando dependências do projeto..."
 docker-compose exec app-adms composer install
+docker-compose exec app-adms php artisan key:generate
+docker-compose exec app-adms php artisan migrate
+docker-compose exec app-adms php artisan db:seed
+docker-compose exec app-adms php artisan jwt:secret
+
+cd ../Client
 docker-compose exec app-client composer install
+docker-compose exec app-client php artisan key:generate
+docker-compose exec app-client php artisan migrate
+docker-compose exec app-client php artisan db:seed
+docker-compose exec app-client php artisan jwt:secret
+
 
 # Passo 5: Criar as tabelas no banco de dados e preencher com dados padrão
 echo "Migrando e populando o banco de dados..."
-docker-compose exec app-adms php artisan migrate
-docker-compose exec app-adms php artisan db:seed
 
-docker-compose exec app-client php artisan migrate
-docker-compose exec app-client php artisan db:seed
 
 # Passo 6: Gerar a chave secreta usada pelo JWT
 echo "Gerando chave secreta do JWT..."
-docker-compose exec app-client php artisan jwt:secret
-docker-compose exec app-adms php artisan jwt:secret
+
 
 echo "Configuração completa!"
