@@ -1,8 +1,9 @@
-version: "3.9"
+version: "3.7"
 services:
   app-adms:
     build:
       args:
+        user: sammy
         uid: 1000
       context: ./
       dockerfile: Dockerfile
