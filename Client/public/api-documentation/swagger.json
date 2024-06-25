@@ -171,6 +171,67 @@
                     }
                 }
             }
+        },
+        "/api/logout": {
+            "get": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Endpoint para logout do cliente",
+                "description": "Passar o token na cabeça (Authorization: Bearer {token})",
+                "operationId": "logoutCliente",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso ao entrar",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de sucesso",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Corpo inválido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de erro",
+                                    "properties": {
+                                        "mensagem": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "erros": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
