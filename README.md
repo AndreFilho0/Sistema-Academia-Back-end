@@ -1,4 +1,4 @@
-# Instruções para Subir o Projeto Pessoal
+# Instruções para Subir o Projeto fullstack parte do back-end
 
 O projeto pessoal utiliza Docker e Docker Compose para facilitar o setup do ambiente de desenvolvimento. Siga os passos abaixo para configurar e executar o projeto no seu PC:
 
@@ -17,10 +17,9 @@ git clone <URL_do_repositório>
 
 Por exemplo, para o micro-serviço servico1, você executaria o seguinte comando na raiz do projeto:
 
-## 2. arrumando o env para cada micro
+## 2. arrumando o env para cada micro e rodando todas as coisas para installar
 ```bash
-cd servico1
-cp .env.example .env
+sh setup
 
 ```
 # Construindo e Iniciando os Contêineres Docker
