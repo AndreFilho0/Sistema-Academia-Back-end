@@ -3,23 +3,20 @@ name: Run Tests
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   Adms:
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: mysql:5.7
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: lifefit
           MYSQL_DATABASE: db_adms
-          MYSQL_USER: root
-          MYSQL_PASSWORD: lifefit
         ports:
           - 3306:3306
 
@@ -29,35 +26,32 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.0
+          php-version: 8.2
 
       - name: Install dependencies
         run: |
           cd Adms
-          composer install
+          composer install || composer update
 
       - name: Set up .env file
         run: |
+          cd Adms
           cp .env.example .env
           php artisan key:generate
 
       - name: Run tests
         run: |
           cd Adms
-          php artisan migrate --env=testing
           php artisan test
 
   Client:
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: mysql:5.7
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: lifefit
           MYSQL_DATABASE: db_client
-          MYSQL_USER: root
-          MYSQL_PASSWORD: lifefit
         ports:
           - 3306:3306
 
@@ -67,20 +61,20 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.0
+          php-version: 8.2
 
       - name: Install dependencies
         run: |
           cd Client
-          composer install
+          composer install || composer update
 
       - name: Set up .env file
         run: |
+          cd Client
           cp .env.example .env
           php artisan key:generate
 
       - name: Run tests
         run: |
           cd Client
-          php artisan migrate --env=testing
           php artisan test
