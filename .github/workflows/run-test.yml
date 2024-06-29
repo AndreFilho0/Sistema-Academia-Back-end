@@ -17,8 +17,6 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: lifefit
           MYSQL_DATABASE: db_adms
-          MYSQL_USER: root
-          MYSQL_PASSWORD: lifefit
         ports:
           - 3306:3306
 
@@ -54,8 +52,6 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: lifefit
           MYSQL_DATABASE: db_client
-          MYSQL_USER: root
-          MYSQL_PASSWORD: lifefit
         ports:
           - 3306:3306
 
