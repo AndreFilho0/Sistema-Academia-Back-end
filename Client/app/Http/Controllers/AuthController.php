@@ -32,7 +32,7 @@ class AuthController extends Controller{
 
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return $this->sucesso("logout feito com sucesso",200,[],1);
 
 
 
@@ -50,23 +50,19 @@ class AuthController extends Controller{
         
  
         if($validar->fails()){
-         return $this->erroValidacao("corpo inválido",400,$validar->errors());
+         return $this->erroValidacao("corpo inválido",400,$validar->errors(),4);
         }
 
         
         $credential =$request->only(['email','password']);
 
         if (! $token = auth()->attempt($credential)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return $this->falha("Credencial invalida para login",401,[],4);
         }
 
         
 
-        return response()->json(
-            [
-                'token'=>$token,
-                
-            ]);
+        return $this->sucesso("sucesso ao fazer login, use o token abaixo agora",200,["token"=>$token],1);
     }
 
 
@@ -82,7 +78,7 @@ class AuthController extends Controller{
         
  
         if($validar->fails()){
-         return $this->erroValidacao("corpo inválido",400,$validar->errors());
+         return $this->erroValidacao("corpo inválido",400,$validar->errors(),4);
         }
         
         $idDoPlano = $this->plano->where('nome', $dados['plano'])->value('id');
@@ -101,7 +97,7 @@ class AuthController extends Controller{
         $user->save();
     
         
-        return $this->sucessoAoCriarConta("conta criada",200,$user);
+        return $this->sucessoAoCriarConta("conta criada",200,$user,1);
 
 
         

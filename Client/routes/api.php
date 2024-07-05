@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([
-    "middleware" => ["auth:api"]
+    "middleware" => ["jwt.auth"]
 ], function(){
 
     Route::get('/user', function (Request $request) {
