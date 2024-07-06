@@ -8,12 +8,15 @@ use App\Models\Cliente;
 use App\Models\Planos;
 use App\Models\Treinos;
 use App\Models\User;
+use App\Repository\AdmsRepository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\QueryException;
 
 class AuthController extends Controller{
     use HttpResponse;
+    private $repository;
     
 
     /**
@@ -23,6 +26,7 @@ class AuthController extends Controller{
      */
     public function __construct()
     {
+        $this->repository = new AdmsRepository();
        
         
     
@@ -83,21 +87,21 @@ class AuthController extends Controller{
          return $this->erroValidacao("corpo inválido",400,$validar->errors(),4);
         }
         
-        
-        
-        
+        try{
 
-        $user =new  User();
-        $user->gerente = $dados['gerente'];
-        $user->professor = $dados['professor'];
-        $user->recepcionista = $dados['recepcionista'];
-        $user->name = $dados['name'];
-        $user->email = $dados['email'];
-        $user->password = Hash::make($dados['password']); 
-        $user->save();
-    
+         $user = $this->repository->criarConta($dados);
+         
+        }catch(QueryException $e){
+            $errorCode = $e->getCode();
+            $errorMessage = $e->getMessage();
+
+            return $this->falha("erro ao tentar criar dado no banco",409,["codigo do erro do banco mysql"=>$errorCode,"mensagem do erro"=>$errorMessage],4);
+
+        }
+
         
-        return $this->sucessoAoCriarConta("conta criada",200,$user,1);
+        
+        return $this->sucessoAoCriarConta("conta criada",201,$user,1);
 
 
         
