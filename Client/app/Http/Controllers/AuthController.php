@@ -8,13 +8,16 @@ use App\Models\Cliente;
 use App\Models\Planos;
 use App\Models\Treinos;
 use App\Models\User;
+use App\Repository\ClientRepository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\QueryException;
 
 class AuthController extends Controller{
     use HttpResponse;
     private $plano ;
+    private $repository;
 
     /**
      * Create a new AuthController instance.
@@ -24,6 +27,7 @@ class AuthController extends Controller{
     public function __construct()
     {
         $this->plano = new Planos();
+        $this->repository = new ClientRepository();
         
     
     }
@@ -80,24 +84,18 @@ class AuthController extends Controller{
         if($validar->fails()){
          return $this->erroValidacao("corpo inválido",400,$validar->errors(),4);
         }
-        
-        $idDoPlano = $this->plano->where('nome', $dados['plano'])->value('id');
-        $treino =  new Treinos();
-        $treino->nomeCliente = $dados['name'];
-        $treino->save();
-        
-        
+        try{
+         $user =  $this->repository->criarConta($dados);
+        }catch(QueryException $e){
+            $errorCode = $e->getCode();
+            $errorMessage = $e->getMessage();
 
-        $user =new  User();
-        $user->idPlano = $idDoPlano;
-        $user->idTreino = $treino->id;
-        $user->name = $dados['name'];
-        $user->email = $dados['email'];
-        $user->password = Hash::make($dados['password']); 
-        $user->save();
+            return $this->falha("erro ao tentar criar dado no banco",409,["codigo do erro do banco mysql"=>$errorCode,"mensagem do erro"=>$errorMessage],4);
+        }
+      
     
         
-        return $this->sucessoAoCriarConta("conta criada",200,$user,1);
+        return $this->sucessoAoCriarConta("conta criada",201,$user,1);
 
 
         
