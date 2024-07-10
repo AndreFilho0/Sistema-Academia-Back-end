@@ -30,14 +30,14 @@ jobs:
             docker-compose up --build -d
             cd ../Adms
             docker-compose up --build -d
-            docker-compose exec app-adms composer install
-            docker-compose exec app-adms php artisan key:generate
-            docker-compose exec app-adms php artisan migrate
-            docker-compose exec app-adms php artisan db:seed
-            docker-compose exec app-adms php artisan jwt:secret
+             docker-compose exec -T app-adms composer install
+            docker-compose exec -T app-adms php artisan key:generate
+            docker-compose exec -T app-adms php artisan migrate
+            docker-compose exec -T app-adms php artisan db:seed
+            docker-compose exec -T app-adms php artisan jwt:secret
             cd ../Client
-            docker-compose exec app-client composer install
-            docker-compose exec app-client php artisan key:generate
-            docker-compose exec app-client php artisan migrate
-            docker-compose exec app-client php artisan db:seed
-            docker-compose exec app-client php artisan jwt:secret
+            docker-compose exec -T app-client composer install
+            docker-compose exec -T app-client php artisan key:generate
+            docker-compose exec -T app-client php artisan migrate
+            docker-compose exec -T app-client php artisan db:seed
+            docker-compose exec -T app-client php artisan jwt:secret
