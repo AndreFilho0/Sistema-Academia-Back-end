@@ -50,8 +50,4 @@ docker-compose exec app-client php artisan jwt:secret
 echo "Migrando e populando o banco de dados..."
 
 
-# Passo 6: Gerar a chave secreta usada pelo JWT
-echo "Gerando chave secreta do JWT..."
 
-
-echo "Configuração completa!"
