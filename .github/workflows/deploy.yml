@@ -17,9 +17,29 @@ jobs:
           key: ${{secrets.SSH_PRIVATE_TEST}}
           passphrase: ${{ secrets.SSH_SENHA }}
           script: |
-            cd ../home/ubuntu/Sistema-Academia-Back-end &&
-            git checkout master &&
-            git pull &&
-            sh setup.sh
+            cd ../home/ubuntu/Sistema-Academia-Back-end
+            git checkout master
+            git pull
+            cd Adms
+            cp .env.example .env
+            cd ..
+            cd Client
+            cp .env.example .env
+            cd ..
+            cd Client 
+            docker-compose up --build -d
+            cd ../Adms
+            docker-compose up --build -d
+            docker-compose exec app-adms composer install
+            docker-compose exec app-adms php artisan key:generate
+            docker-compose exec app-adms php artisan migrate
+            docker-compose exec app-adms php artisan db:seed
+            docker-compose exec app-adms php artisan jwt:secret
+            cd ../Client
+            docker-compose exec app-client composer install
+            docker-compose exec app-client php artisan key:generate
+            docker-compose exec app-client php artisan migrate
+            docker-compose exec app-client php artisan db:seed
+            docker-compose exec app-client php artisan jwt:secret
             
             
