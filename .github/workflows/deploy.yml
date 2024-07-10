@@ -15,6 +15,7 @@ jobs:
           host: 195.200.5.149
           username: "root"
           key: ${{secrets.SSH_PRIVATE_TEST}}
+          passphrase: ${{ secrets.SSH_SENHA }}
           script: |
             cd ../home/ubuntu/Sistema-Academia-Back-end &&
             git checkout master &&
