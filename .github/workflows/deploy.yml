@@ -1,0 +1,24 @@
+name: "deploy para a vps"
+
+on:
+ push:
+   branches:
+     - master
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "entrando no repositorio puxando as alteração e subindo os docker"
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 195.200.5.149
+          username: "root"
+          key: ${{secrets.SSH_PRIVATE_TEST}}
+          script: |
+            cd ../home/ubuntu/Sistema-Academia-Back-end &&
+            git checkout master &&
+            git pull &&
+            sh setup.sh
+            
+            
