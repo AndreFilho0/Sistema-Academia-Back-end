@@ -20,16 +20,3 @@ jobs:
             cd ../home/ubuntu/Sistema-Academia-Back-end
             git checkout master
             git pull
-            cd Adms
-            cp .env.example .env
-            cd ..
-            cd Client
-            cp .env.example .env
-            cd ..
-            cd Client 
-            docker-compose up --build -d
-            cd ../Adms
-            docker-compose up --build -d
-            docker-compose exec -T app-adms /bin/sh -c "composer install && php artisan key:generate && php artisan migrate && php artisan db:seed && php artisan jwt:secret"
-            cd ../Client
-            docker-compose exec -T app-client /bin/sh -c "composer install && php artisan key:generate && php artisan migrate && php artisan db:seed && php artisan jwt:secret"
