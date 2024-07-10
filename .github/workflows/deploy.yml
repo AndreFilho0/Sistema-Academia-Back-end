@@ -41,5 +41,3 @@ jobs:
             docker-compose exec app-client php artisan migrate
             docker-compose exec app-client php artisan db:seed
             docker-compose exec app-client php artisan jwt:secret
-            
-            
