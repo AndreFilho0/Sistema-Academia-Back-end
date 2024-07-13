@@ -15,13 +15,13 @@ return new class extends Migration
         Schema::create('treinos', function (Blueprint $table) {
             $table->id();
             $table->string('nomeCliente');
-            $table->string('segunda-feira')->nullable();
-            $table->string('terca-feira')->nullable();
-            $table->string('quarta-feira')->nullable();
-            $table->string('quinta-feira')->nullable();
-            $table->string('sexta-feira')->nullable();
-            $table->string('sabado')->nullable();
-            $table->string('domingo')->nullable();
+            $table->longText('segunda-feira')->nullable();
+            $table->longText('terca-feira')->nullable();
+            $table->longText('quarta-feira')->nullable();
+            $table->longText('quinta-feira')->nullable();
+            $table->longText('sexta-feira')->nullable();
+            $table->longText('sabado')->nullable();
+            $table->longText('domingo')->nullable();
             $table->timestamps();
         });
     }

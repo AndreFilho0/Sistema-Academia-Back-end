@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TreinoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,10 @@ Route::group([
     });
 
     Route::get('/logout',[AuthController::class,'logout']);
+
+    Route::put('treino',[TreinoController::class,'putTreino']);
+    Route::get('treino',[TreinoController::class,'getTreino']);
+    Route::delete('treino',[TreinoController::class,"deleteTabela"]);
     
 });
 

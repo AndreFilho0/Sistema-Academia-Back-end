@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
  * @OA\Info(
  *     title="Micro-Serviço Cliente-api",
  *     version="1.0.0",
- *     description="todos os endpoints usados pelo cliente",
+ *     description="todos os endpoints usados pelo cliente , porta local: localhost:8006 ou na vps: 195.200.5.149:8006",
  *   
  * )
  */
@@ -29,6 +29,9 @@ class AuthDocsController {
  *              @OA\Property(property="name", type="string"),
  *              @OA\Property(property="email", type="string"),
  *              @OA\Property(property="password", type="string"),
+ *              @OA\Property(property="idade", type="string"),
+  *             @OA\Property(property="peso", type="string"),
+   *            @OA\Property(property="altura", type="string"),
 *              @OA\Property(property="plano", type="string", enum={"mensal", "trimestral", "semestral","anual"})
  *          )
  *      ),
@@ -120,7 +123,7 @@ class AuthDocsController {
      *      summary="Endpoint para logout do cliente",
      *      description="Passar o token na cabeça (Authorization: Bearer {token})",
      *      @OA\Parameter(
-     *          name="Authorization",
+     *          name="Authorization Bearer",
      *          in="header",
      *          required=true,
      *          description="Token JWT",
