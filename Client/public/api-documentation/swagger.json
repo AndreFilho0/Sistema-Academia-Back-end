@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Micro-Serviço Cliente-api",
-        "description": "todos os endpoints usados pelo cliente",
+        "description": "todos os endpoints usados pelo cliente , porta local: localhost:8006 ou na vps: 195.200.5.149:8006",
         "version": "1.0.0"
     },
     "paths": {
@@ -34,6 +34,15 @@
                                         "type": "string"
                                     },
                                     "password": {
+                                        "type": "string"
+                                    },
+                                    "idade": {
+                                        "type": "string"
+                                    },
+                                    "peso": {
+                                        "type": "string"
+                                    },
+                                    "altura": {
                                         "type": "string"
                                     },
                                     "plano": {
@@ -182,7 +191,7 @@
                 "operationId": "logoutCliente",
                 "parameters": [
                     {
-                        "name": "Authorization",
+                        "name": "Authorization Bearer",
                         "in": "header",
                         "description": "Token JWT",
                         "required": true,
@@ -210,6 +219,246 @@
                     },
                     "400": {
                         "description": "Corpo inválido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de erro",
+                                    "properties": {
+                                        "mensagem": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "erros": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/treino": {
+            "get": {
+                "tags": [
+                    "Treino"
+                ],
+                "summary": "endpoint para pegar o treino do cliente",
+                "description": "",
+                "operationId": "treinoClienteGet",
+                "parameters": [
+                    {
+                        "name": "Authorization Bearer",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de sucesso",
+                                    "properties": {
+                                        "mensagem": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "dados": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "corpo invalido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de erro",
+                                    "properties": {
+                                        "mensagem": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "erros": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Treino"
+                ],
+                "summary": "endpoint para editar a tabela de treino",
+                "description": "",
+                "operationId": "treinoCliente",
+                "parameters": [
+                    {
+                        "name": "Authorization Bearer",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Corpo da requisição contendo os dados para update do registro",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "segunda-feira",
+                                    "terca-feira",
+                                    "quarta-feira",
+                                    "quinta-feira",
+                                    "sexta-feira",
+                                    "sabado",
+                                    "domingo"
+                                ],
+                                "properties": {
+                                    "segunda-feira": {
+                                        "example": "{}"
+                                    },
+                                    "terca-feira": {
+                                        "example": "{}"
+                                    },
+                                    "quarta-feira": {
+                                        "example": "{}"
+                                    },
+                                    "quinta-feira": {
+                                        "example": "{}"
+                                    },
+                                    "sexta-feira": {
+                                        "example": "{}"
+                                    },
+                                    "sabado": {
+                                        "example": "{}"
+                                    },
+                                    "domingo": {
+                                        "example": "{}"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de sucesso",
+                                    "properties": {
+                                        "mensagem": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "dados": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "corpo invalido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de erro",
+                                    "properties": {
+                                        "mensagem": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "erros": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Treino"
+                ],
+                "summary": "endpoint para pegar deletar registro atual de treino do cliente",
+                "description": "",
+                "operationId": "treinoClienteDelete",
+                "parameters": [
+                    {
+                        "name": "Authorization Bearer",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de sucesso",
+                                    "properties": {
+                                        "mensagem": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "dados": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "corpo invalido",
                         "content": {
                             "application/json": {
                                 "schema": {

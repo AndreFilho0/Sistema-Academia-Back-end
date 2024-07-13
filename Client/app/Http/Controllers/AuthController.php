@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller{
     use HttpResponse;
@@ -76,6 +77,9 @@ class AuthController extends Controller{
         [   
             'name'=> 'required|string',
             'email'=> 'required|string',
+            'idade'=>'nullable|string',
+            'peso'=>'nullable|string',
+            'altura'=>'nullable|string',
             'password'=> 'required|string',
             'plano'=>'required|string|in:mensal,trimestral,semestral,anual'
         ]);
@@ -85,10 +89,12 @@ class AuthController extends Controller{
          return $this->erroValidacao("corpo inválido",400,$validar->errors(),4);
         }
         try{
+            DB::beginTransaction();
          $user =  $this->repository->criarConta($dados);
         }catch(QueryException $e){
             $errorCode = $e->getCode();
             $errorMessage = $e->getMessage();
+            DB::rollBack();
 
             return $this->falha("erro ao tentar criar dado no banco",409,["codigo do erro do banco mysql"=>$errorCode,"mensagem do erro"=>$errorMessage],4);
         }
