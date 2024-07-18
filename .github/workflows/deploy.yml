@@ -12,7 +12,7 @@ jobs:
       - name: "entrando no repositorio puxando as alteração e subindo os docker"
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 195.200.5.149
+          host: ${{secrets.IP_DEPLOY}}
           username: "root"
           key: ${{secrets.SSH_PRIVATE_TEST}}
           passphrase: ${{ secrets.SSH_SENHA }}
