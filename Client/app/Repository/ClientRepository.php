@@ -63,13 +63,13 @@ class ClientRepository {
                 ->join('treinos', 'clientes.idTreino', '=', 'treinos.id')
                 ->where("treinos.id", "=", $id)
                 ->update([
-                    'treinos.segunda-feira' => json_encode($dados['segunda-feira'],JSON_UNESCAPED_UNICODE),
-                    'treinos.terca-feira' => json_encode($dados['terca-feira'],JSON_UNESCAPED_UNICODE),
-                    'treinos.quarta-feira' => json_encode($dados['quarta-feira'],JSON_UNESCAPED_UNICODE),
-                    'treinos.quinta-feira' => json_encode($dados['quinta-feira'],JSON_UNESCAPED_UNICODE),
-                    'treinos.sexta-feira' => json_encode($dados['sexta-feira'],JSON_UNESCAPED_UNICODE),
-                    'treinos.sabado' => json_encode($dados['sabado'],JSON_UNESCAPED_UNICODE),
-                    'treinos.domingo' => json_encode($dados['domingo'],JSON_UNESCAPED_UNICODE),
+                    'treinos.segunda-feira' => json_encode($dados->segundaFeira,JSON_UNESCAPED_UNICODE),
+                    'treinos.terca-feira' => json_encode($dados->tercaFeira,JSON_UNESCAPED_UNICODE),
+                    'treinos.quarta-feira' => json_encode($dados->quartaFeira,JSON_UNESCAPED_UNICODE),
+                    'treinos.quinta-feira' => json_encode($dados->quintaFeira,JSON_UNESCAPED_UNICODE),
+                    'treinos.sexta-feira' => json_encode($dados->sextaFeira,JSON_UNESCAPED_UNICODE),
+                    'treinos.sabado' => json_encode($dados->sabado,JSON_UNESCAPED_UNICODE),
+                    'treinos.domingo' => json_encode($dados->domingo,JSON_UNESCAPED_UNICODE),
                 ]);
         });
 
