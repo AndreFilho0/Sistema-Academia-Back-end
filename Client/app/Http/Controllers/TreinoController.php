@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DTOs\TabelaTreinoDTO;
 use Illuminate\Http\Request;
 use App\Helpers\HttpResponse;
 use App\Repository\ClientRepository;
@@ -14,11 +15,7 @@ class TreinoController{
     use HttpResponse;
     private $repository;
 
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
+    
     public function __construct()
     {
         $this->repository = new ClientRepository();
@@ -48,7 +45,18 @@ class TreinoController{
         }
 
 
-        $dados = $request->all();
+        $dados = new TabelaTreinoDTO(
+            $request->input('segunda-feira'),
+            $request->input('terca-feira'),
+            $request->input('quarta-feira'),
+            $request->input('quinta-feira'),
+            $request->input('sexta-feira'),
+            $request->input('sabado'),
+            $request->input('domingo')
+        );
+
+       
+        
         $idTreino = $request->user()->idTreino;
         
         try{

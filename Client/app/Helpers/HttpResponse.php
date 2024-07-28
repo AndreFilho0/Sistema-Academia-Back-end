@@ -16,7 +16,7 @@ trait HttpResponse{
            'erros'=>$erros,
         ],$status);
     }
-    public function sucesso(string $messagem , int $status ,array $dados, int $codigo ){
+    public function sucesso(string $messagem , int $status , $dados, int $codigo ){
 
         return response()->json([
            'message'=>$messagem,
