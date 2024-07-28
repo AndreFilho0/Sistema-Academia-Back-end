@@ -103,4 +103,15 @@ class ClientRepository {
 
     }
 
+    public function allInformationClient(){
+
+     $dados =   DB::connection('mysql')->select("SELECT
+      clientes.name, clientes.idade, clientes.peso, clientes.altura, planos.nome,
+      treinos.`segunda-feira`, treinos.`terca-feira`, treinos.`quarta-feira`,
+      treinos.`quinta-feira`, treinos.`sexta-feira`, treinos.`sabado`, treinos.domingo,
+      clientes.email FROM clientes JOIN treinos ON clientes.idTreino = treinos.id JOIN planos ON clientes.idPlano = planos.id");
+
+      return $dados;    
+    }
+
 }
