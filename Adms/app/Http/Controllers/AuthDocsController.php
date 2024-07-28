@@ -156,6 +156,49 @@ class AuthDocsController {
  public function logout(){
 
  }
+/**
+     * @OA\Get(
+     *      path="user/All",
+     *      operationId="userDados",
+     *      tags={"Ver dados dos clientes"},
+     *      summary="Endpoint para ver informações dos clientes ",
+     *      description="Passar o token na cabeça (Authorization: Bearer {token})",
+     *      @OA\Parameter(
+     *          name="Authorization",
+     *          in="header",
+     *          required=true,
+     *          description="Token JWT",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Sucesso ao entrar",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              description="Resposta de sucesso",
+     *              @OA\Property(property="message", type="string"),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Corpo inválido",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              description="Resposta de erro",
+     *              @OA\Property(property="mensagem", type="string"),
+     *              @OA\Property(property="status", type="string"),
+     *              @OA\Property(property="erros", type="object")
+     *          )
+     *      ),
+     *     
+     * )
+     */
+ public function getAllClientInformation(){
+
+
+ }
 
 
 

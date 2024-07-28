@@ -234,6 +234,67 @@
                     }
                 }
             }
+        },
+        "user/All": {
+            "get": {
+                "tags": [
+                    "Ver dados dos clientes"
+                ],
+                "summary": "Endpoint para ver informações dos clientes ",
+                "description": "Passar o token na cabeça (Authorization: Bearer {token})",
+                "operationId": "userDados",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso ao entrar",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de sucesso",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Corpo inválido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Resposta de erro",
+                                    "properties": {
+                                        "mensagem": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "erros": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
